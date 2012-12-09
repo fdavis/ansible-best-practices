@@ -1,0 +1,8 @@
+---
+# these are variables that are probably needed by all web server playbooks
+some_list: 
+ - thing1
+ - thing2
+ - thing3
+
+myvar: v_name

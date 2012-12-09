@@ -1,0 +1,12 @@
+---
+# these are global vars, probably included in every (or almost every) plabook
+
+important_list:
+ - my
+ - playbooks
+ - cannot
+ - live
+ - without
+ - these
+
+important_fact: it works now
