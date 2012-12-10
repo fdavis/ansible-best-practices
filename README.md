@@ -1,3 +1,10 @@
+On second thought, I was probably wrong, under the included ascii art depiction 
+of the directory structure is a comment of 
+    The tasks are individually broken out in ‘acme/tasks/setup.yml’
+... I think an individual folder per task/service/other like [sfromm's repo][1] uses is probably the way to go.  (???)
+[1]: https://github.com/sfromm/ansible-playbooks
+
+
 This repo is intended to show my understanding of 'ideal' Ansible playbook directory structure
 
 At a glance this seems like a simple structure, bit in practice it seems awfully complex to break up tasks.
