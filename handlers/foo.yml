@@ -1,3 +1,7 @@
 ---
 # these are handlers for the foo playbooks
-
+#
+# it doesn't really make sense for these to be available to all playbooks,
+# unless other playbooks need to use these handlers.
+# But anything more complicated than restarting probably shouldn't 
+# be done by a different playbook? Use case??

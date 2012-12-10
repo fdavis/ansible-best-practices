@@ -1,6 +1,0 @@
----
-# this is part of making an nx server and should probably be refactored to reflect this
-# especially since this task cannot be useful for anything but making an nx server
-  - name: Copying over nx config
-    copy: copy src=files/node.conf dest=/etc/nxserver/node.conf mode=0755 backup=yes
-

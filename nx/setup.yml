@@ -1,2 +1,27 @@
 ---
-# this playbook sets up nx server
+ - name: setup nx server
+   hosts: tag_Class_nx_servers
+   user: root
+   gather_facts: False
+
+   tasks:
+     - name: yum install packages
+       yum: name=${item} state=latest
+       with_items:
+            - nx
+            - freenx
+
+     - name: yum group install X, Gnome
+       command: yum groupinstall -y ${item}
+       with_items:
+            - X Window System
+            - Desktop
+
+     # bring over nxserver config
+     - name: copy node.conf
+       copy: src=../files/node.conf dest=/etc/nxserver/node.conf owner=root mode=0555 backup=yes
+
+    # ignores errors because this will return warning and error messages on success ...
+     - name: Setup freenx
+       command: nxsetup --install --setup-nomachine-key
+       ignore_errors: True
