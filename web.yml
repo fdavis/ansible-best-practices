@@ -1,0 +1,7 @@
+---
+- hosts: django-servers
+  sudo: yes
+  roles:
+    - role: django
+      tags:
+        - django

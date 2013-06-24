@@ -1,0 +1,3 @@
+---
+# place your role specific variables here for ansible to automatically import them!
+django_var_1: data

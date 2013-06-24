@@ -1,6 +1,0 @@
----
-# These vars are probably only needed by the something service playbook
-
-something_version: 1.2
-something_pages:
- - index.html

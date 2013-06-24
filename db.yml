@@ -1,0 +1,7 @@
+---
+- hosts: postgres-servers
+  sudo: yes
+  roles:
+    - role: postgres
+      tags:
+        - postgres

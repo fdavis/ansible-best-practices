@@ -1,0 +1,9 @@
+# this file is the stage file, use with ansible-playbook -i stage
+#
+ubuntu-dev-server ansible_ssh_port=2222 ansible_ssh_host=127.0.0.1
+
+[django-servers]
+ubuntu-dev-server
+
+[postgres-servers]
+ubuntu-dev-server 

@@ -1,9 +1,0 @@
----
-# The packages needed to install nx
-yum_pkgs:
- - freenx
- - nx
-
-yum_groups:
- - X Window System
- - Desktop

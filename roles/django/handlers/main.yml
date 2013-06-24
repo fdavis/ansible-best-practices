@@ -1,0 +1,9 @@
+---
+- name: service nginx start/enable
+  service: name=nginx state=restarted enabled=yes
+
+- name: service uwsgi start/enable
+  service: name=uwsgi state=restarted enabled=yes
+
+- name: django syncdb
+  command: chdir=/opt/mysite/mysite python manage.py syncdb --noinput

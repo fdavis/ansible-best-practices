@@ -1,0 +1,21 @@
+---
+- name: install postgres pkgs
+  apt: pkg=$item state=present
+  with_items:
+    - libpq-dev
+    - postgresql 
+    - python-psycopg2
+
+- name: setup pg_hba file
+  copy: src=pg_hba.conf dest=/etc/postgresql/9.1/main/pg_hba.conf owner=postgres group=postgres mode=0640
+  register: pg_file
+
+- name: reload postgres if it changed
+  service: name=postgresql state=reloaded enabled=yes
+  when: pg_file.changed
+
+- name: make a db
+  postgresql_db: db=dj
+
+- name: make a db user
+  postgresql_user: db=dj user=django password=ceec4eif7ya priv=ALL

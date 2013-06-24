@@ -1,0 +1,6 @@
+---
+- hosts: all 
+
+  tasks:
+    - name: add ssh key
+      authorized_key: user=fdavis key='$FILE(/home/fdavis/.ssh/id_rsa.pub)' state=present

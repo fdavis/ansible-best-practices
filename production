@@ -1,0 +1,9 @@
+# I usually specify vars at top of the hostfile so they are easily accesible, 
+# but if you have a lot or complex variables I recommend using the host_vars files
+ubuntu-server ansible_ssh_port=2222 ansible_ssh_host=127.0.0.1
+
+[django-servers]
+ubuntu-server
+
+[postgres-servers]
+ubuntu-server 

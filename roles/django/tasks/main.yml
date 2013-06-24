@@ -1,0 +1,56 @@
+---
+- name: get the django source
+  uri: url=https://www.djangoproject.com/download/1.5.1/tarball/ dest=/opt/django.tgz follow_redirects=yes creates=/opt/django.tgz
+  notify: service nginx start/enable
+
+- name: untar django
+  command: tar xf /opt/django.tgz -C /opt creates=/opt/Django-1.5.1
+  notify: service nginx start/enable
+
+- name: install it
+  command: chdir=/opt/Django-1.5.1 python setup.py install creates=/opt/Django-1.5.1/README.rst
+  notify: service nginx start/enable
+
+- name: install deps
+  apt: pkg=$item state=present
+  with_items:
+    - python-psycopg2
+    - python-pip
+    - python-dev
+    - nginx
+  notify: service nginx start/enable
+  tags:
+    - aptget
+
+- name: install uwsgi
+  pip: name=uwsgi state=present
+  notify: service nginx start/enable
+
+- name: get the webapp
+  git: repo=git://github.com/fdavis/django-site.git force=yes dest=/opt/mysite
+  notify: 
+    - service uwsgi start/enable
+    - django syncdb
+  tags:
+    - gitpull
+
+- name: setup django conf for nginx
+  copy: src=django dest=/etc/nginx/sites-available/django mode=0644 owner=root group=root
+  notify: service nginx start/enable
+
+- name: symlink from sites enabled
+  shell: ln -s ../sites-available/django /etc/nginx/sites-enabled/django creates=/etc/nginx/sites-enabled/django
+  notify: service nginx start/enable
+
+- name: remove default enabled
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: service nginx start/enable
+
+- name: copy over uwsgi django.ini
+  copy: src=django.ini dest=/etc/nginx/django.ini
+  notify: service uwsgi start/enable
+
+- name: copy over uwsgi.conf
+  copy: src=uwsgi.conf dest=/etc/init/uwsgi.conf owner=root group=root mode=0644
+  notify: service uwsgi start/enable
+

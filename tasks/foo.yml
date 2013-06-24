@@ -1,4 +1,0 @@
----
-# these are tasks we will only use when dealing with foo
-#
-# So, why should they be available to all playbooks?

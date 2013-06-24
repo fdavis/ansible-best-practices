@@ -1,4 +1,0 @@
----
-# This is needed for playbooks configuring CentOS
-apache: httpd
-packager: yum
