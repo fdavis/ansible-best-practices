@@ -3,4 +3,4 @@
 
   tasks:
     - name: add ssh key
-      authorized_key: user=fdavis key='$FILE(/home/fdavis/.ssh/id_rsa.pub)' state=present
+      authorized_key: user=fdavis key="{{ lookup('file', '/home/fdavis/.ssh/id_rsa.pub') }}" state=present
