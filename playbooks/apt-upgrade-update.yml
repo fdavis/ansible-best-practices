@@ -1,6 +1,12 @@
 ---
 - hosts: all
-  sudo: yes
+  become: yes
   tasks:
-    - shell: apt-get upgrade -y; apt-get update
-  
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      changed_when: false
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: 'yes'
